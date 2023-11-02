@@ -1,0 +1,269 @@
+﻿<Window x:Class="WpfApp3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="Typing Speed Test" Width="815" Height="600">
+    <Grid>
+        <!-- Time -->
+        <StackPanel Orientation="Horizontal" Margin="20,0,690,530">
+            <ComboBox
+                materialDesign:HintAssist.Hint="Time (sec)"
+                Name="timeComboBox" Width="70"
+                VerticalAlignment="Center">
+                <ComboBoxItem
+                    Content="30" />
+                <ComboBoxItem
+                    Content="60" />
+                <ComboBoxItem
+                    Content="90" />
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Difficulty -->
+        <StackPanel Orientation="Horizontal" Margin="170,0,540,530">
+            <ComboBox
+                materialDesign:HintAssist.Hint="Difficulty"
+                Name="difficultyComboBox"
+                Width="70"
+                VerticalAlignment="Center"
+                SelectionChanged="difficultyComboBox_SelectionChanged">
+                <ComboBoxItem Content="Easy" />
+                <ComboBoxItem Content="Medium" />
+                <ComboBoxItem Content="Hard" />
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Statistic -->
+        <TextBlock Name="statisticsTextBlock" Text="Speed: 0 WPM Errors: 0" Width="300" Margin="250,0,70,540" FontSize="16" Background="White" Foreground="Black" />
+
+        <!-- Start -->
+        <StackPanel Orientation="Horizontal" Margin="700,0,0,535">
+            <Button
+                Height="25"
+                Width="85"
+                Content="START"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Style="{StaticResource MaterialDesignPaperDarkButton}"
+                ToolTip="Resource name: MaterialDesignPaperDarkButton"
+                Click="StartButton_Click"/>
+        </StackPanel>
+
+        <!-- Enter string -->
+        <TextBlock 
+            Name="targetTextBlock"
+            Text="Enter Text."
+            Opacity="0.5"
+            Margin="37,70,0,0"
+            Width="760"
+            Height="55"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap"/>
+        <TextBox
+            Name="inputTextBox"
+            Margin="20,50,0,0"
+            Width="760"
+            Height="55"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint=""
+            AcceptsReturn="True"
+            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap"
+            TextChanged="inputTextBox_TextChanged" />
+
+        <!-- Keys -->
+        <WrapPanel Name="keyboardPanel1" Margin="20,200,20,20" HorizontalAlignment="Center">
+            <Grid Name="qKey" Width="50" Height="50" Margin="5">
+                <Button Content="Q" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="wKey" Width="50" Height="50" Margin="5">
+                <Button Content="W" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="eKey" Width="50" Height="50" Margin="5">
+                <Button Content="E" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="rKey" Width="50" Height="50" Margin="5">
+                <Button Content="R" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="tKey" Width="50" Height="50" Margin="5">
+                <Button Content="T" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="yKey" Width="50" Height="50" Margin="5">
+                <Button Content="Y" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="uKey" Width="50" Height="50" Margin="5">
+                <Button Content="U" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="iKey" Width="50" Height="50" Margin="5">
+                <Button Content="I" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="oKey" Width="50" Height="50" Margin="5">
+                <Button Content="O" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="pKey" Width="50" Height="50" Margin="5">
+                <Button Content="P" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+        </WrapPanel>
+
+        <WrapPanel Name="keyboardPanel2" Margin="20,250,20,20" HorizontalAlignment="Center">
+            <Grid Name="aKey" Width="50" Height="50" Margin="5,5,5,5">
+                <Button Content="A" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="sKey" Width="50" Height="50" Margin="5">
+                <Button Content="S" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="dKey" Width="50" Height="50" Margin="5">
+                <Button Content="D" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="fKey" Width="50" Height="50" Margin="5">
+                <Button Content="F" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="gKey" Width="50" Height="50" Margin="5">
+                <Button Content="G" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="hKey" Width="50" Height="50" Margin="5">
+                <Button Content="H" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="jKey" Width="50" Height="50" Margin="5">
+                <Button Content="J" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="kKey" Width="50" Height="50" Margin="5">
+                <Button Content="K" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="lKey" Width="50" Height="50" Margin="5">
+                <Button Content="L" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+        </WrapPanel>
+
+        <WrapPanel Name="keyboardPanel" Margin="20,300,20,20" HorizontalAlignment="Center">
+            <Grid Name="zKey" Width="50" Height="50" Margin="5">
+                <Button Content="Z" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="xKey" Width="50" Height="50" Margin="5">
+                <Button Content="X" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="cKey" Width="50" Height="50" Margin="5">
+                <Button Content="C" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="vKey" Width="50" Height="50" Margin="5">
+                <Button Content="V" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="bKey" Width="50" Height="50" Margin="5">
+                <Button Content="B" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="nKey" Width="50" Height="50" Margin="5">
+                <Button Content="N" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+
+            <Grid Name="mKey" Width="50" Height="50" Margin="5">
+                <Button Content="M" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignPaperDarkButton}"
+                    ToolTip="Resource name: MaterialDesignPaperDarkButton"/>
+            </Grid>
+        </WrapPanel>
+    </Grid>
+</Window>
