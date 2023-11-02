@@ -29,7 +29,7 @@ namespace WpfApp3
 
         private void GenerateText()
         {
-            int textLength = 20;
+            int textLength = 25;
             Random random = new Random();
             string chars = "abcdefghijklmnopqrstuvwxyz";
             targetText = "";
